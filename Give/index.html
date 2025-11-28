@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIVE/GO | Connect. Simplify. Impact.</title>
-    <!-- Tailwind CSS Script -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoIF2gQ+oR9byZ1kI6i8Kz7G+mSg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <style>
@@ -147,10 +145,8 @@
 </head>
 <body class="font-sans antialiased bg-gray-50 text-gray-900 transition-colors">
 
-    <!-- Animated Background Layer (First child of body) -->
     <div class="animated-bg"></div> 
     
-    <!-- Header (Navigation) -->
     <header class="bg-white shadow-sm sticky top-0 z-50 transition-colors dark:bg-2D2D2D border-b border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -166,7 +162,6 @@
                 </nav>
                 <div class="flex items-center space-x-4">
                     
-                    <!-- Dark Mode Toggle Button -->
                     <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-700 transition-colors">
                         <svg class="w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path id="moon-icon" class="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
@@ -174,7 +169,6 @@
                         </svg>
                     </button>
                     
-                    <!-- Mobile Menu Button (Placeholder) -->
                     <button class="md:hidden p-2 rounded-md text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-givengo-blue" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -188,7 +182,6 @@
 
     <main>
         
-        <!-- 1. HERO SECTION: Dynamic Headline & Dual CTAs (Darker Gradient) -->
         <section class="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-[#0a192f] to-givengo-blue text-white relative overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                 <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight drop-shadow-lg scroll-in">
@@ -214,7 +207,6 @@
         </section>
 
         
-        <!-- 2. "Our Impact" Snapshot -->
         <section id="impact" class="bg-gray-100 py-16 sm:py-20 transition-colors">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-12 scroll-in">Our Impact, Together.</h2>
@@ -240,14 +232,12 @@
         </section>
 
         
-        <!-- 3. How It Works - Interactive Stepped Interface -->
         <section id="how-it-works" class="py-16 sm:py-20 bg-white transition-colors">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-12 scroll-in">How It Works</h2>
                 
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     
-                    <!-- Left: Steps Navigation -->
                     <div class="space-y-6 md:space-y-8 scroll-in">
                         <div class="flex items-start p-6 bg-gray-50 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg cursor-pointer how-it-works-step active" data-step="1">
                             <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-givengo-orange text-white text-xl font-bold">1</div>
@@ -272,17 +262,13 @@
                         </div>
                     </div>
                     
-                    <!-- Right: Visual/Image for Current Step -->
                     <div class="md:order-last order-first scroll-in relative h-96">
-                        <!-- Visual 1: Snap & List -->
                         <div id="how-it-works-visual-1" class="how-it-works-visual absolute w-full h-full p-6 bg-givengo-orange/10 rounded-3xl shadow-xl flex items-center justify-center text-givengo-orange text-6xl transition-all duration-500 transform scale-100 opacity-100">
                            <i class="fas fa-camera"></i> <span class="ml-4 fas fa-boxes"></span>
                         </div>
-                        <!-- Visual 2: Smart Match -->
                         <div id="how-it-works-visual-2" class="how-it-works-visual absolute w-full h-full p-6 bg-givengo-blue/20 rounded-3xl shadow-xl flex items-center justify-center text-givengo-blue text-6xl hidden transition-all duration-500 transform scale-95 opacity-0">
                            <i class="fas fa-search-location"></i> <span class="ml-4 fas fa-check-circle"></span>
                         </div>
-                        <!-- Visual 3: Connect & Go -->
                         <div id="how-it-works-visual-3" class="how-it-works-visual absolute w-full h-full p-6 bg-givengo-orange/10 rounded-3xl shadow-xl flex items-center justify-center text-givengo-orange text-6xl hidden transition-all duration-500 transform scale-95 opacity-0">
                            <i class="fas fa-handshake"></i> <span class="ml-4 fas fa-car-side"></span>
                         </div>
@@ -292,12 +278,10 @@
         </section>
 
         
-        <!-- 4. Featured Success Story -->
         <section id="stories" class="bg-gray-100 py-16 sm:py-20 transition-colors">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-12 scroll-in">Stories of Impact</h2>
                 <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl p-8 md:p-12 scroll-in">
-                    <!-- Note: The YouTube link is a placeholder, as intended. -->
                     <iframe class="w-full aspect-video rounded-2xl shadow-lg mb-6" src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h3 class="text-2xl font-bold text-gray-900">"A new beginning for our family"</h3>
                     <p class="mt-4 text-lg text-gray-600 italic">"Thanks to GIVE/GO, we received a perfectly good washing machine and dryer. It's made such a difference in our daily lives. We are incredibly grateful to the generous donor and this amazing platform."</p>
@@ -317,7 +301,6 @@
 
     </main>
     
-    <!-- 5. Footer -->
     <footer class="bg-gray-900 text-gray-300 py-12 transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -350,7 +333,6 @@
         </div>
     </footer>
 
-    <!-- Item Category Modal -->
     <div id="item-modal" class="modal-backdrop flex items-center justify-center p-4">
         <div class="item-modal-content relative">
             <button onclick="closeGiveItemModal()" class="absolute top-4 right-4 text-gray-400 hover:text-givengo-orange transition-colors">
@@ -361,25 +343,21 @@
             <p class="text-gray-600 mb-6">Select a category to start your donation listing.</p>
 
             <div class="grid grid-cols-2 gap-4">
-                <!-- Clothes -->
                 <a href="/list/clothes" class="item-card p-4 text-center rounded-xl border border-gray-600 hover:border-givengo-orange cursor-pointer">
                     <i class="fas fa-tshirt fa-2x text-givengo-orange mb-2"></i>
                     <p class="font-semibold text-gray-100">Clothes</p>
                 </a>
                 
-                <!-- Books -->
                 <a href="/list/books" class="item-card p-4 text-center rounded-xl border border-gray-600 hover:border-givengo-orange cursor-pointer">
                     <i class="fas fa-book-open fa-2x text-givengo-blue mb-2"></i>
                     <p class="font-semibold text-gray-100">Books</p>
                 </a>
 
-                <!-- Food -->
                 <a href="/list/food" class="item-card p-4 text-center rounded-xl border border-gray-600 hover:border-givengo-orange cursor-pointer">
                     <i class="fas fa-utensils fa-2x text-givengo-orange mb-2"></i>
                     <p class="font-semibold text-gray-100">Food</p>
                 </a>
                 
-                <!-- Electronic Items -->
                 <a href="/list/electronics" class="item-card p-4 text-center rounded-xl border border-gray-600 hover:border-givengo-orange cursor-pointer">
                     <i class="fas fa-laptop fa-2x text-givengo-blue mb-2"></i>
                     <p class="font-semibold text-gray-100">Electronics</p>
@@ -389,8 +367,6 @@
             <p class="mt-6 text-xs text-gray-500">Need to request an item instead? <a href="/request-item" class="text-givengo-blue hover:underline">Click here.</a></p>
         </div>
     </div>
-    <!-- End of Item Category Modal -->
-
     <script>
         // --- Dark Mode Toggle Logic (Updated for Dark First) ---
         const themeToggle = document.getElementById('theme-toggle');
