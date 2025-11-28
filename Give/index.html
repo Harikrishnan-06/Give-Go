@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIVE/GO | Connect. Simplify. Impact.</title>
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoIF2gQ+oR9byZ1kI6i8Kz7G+mSg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        /* --- 1. Custom Colors & General Styles --- */
+        
+        /* Custom Orange for the main CTA */
+        .bg-givengo-orange { background-color: #FF5722; } /* Vibrant */
+        .hover\:bg-givengo-orange-dark:hover { background-color: #E64A19; }
+        .text-givengo-orange { color: #FF5722; }
+
+        /* Custom Blue for branding */
+        .text-givengo-blue { color: #1977D2; } /* Stable */
+        .border-givengo-blue { border-color: #1977D2; }
+        .bg-givengo-blue { background-color: #1977D2; }
+        
+        /* General smooth transition for theme change */
+        body { transition: background-color 0.3s ease; }
+        .transition-colors { transition: background-color 0.3s ease, color 0.3s ease; }
+
+        /* --- 2. DARK MODE PALETTE (DEEPER AND RICHER) --- */
+        
+        /* Deep Charcoal Background (Replaces default light gray body) */
+        .dark .bg-gray-50, .dark body { background-color: #121212 !important; }
+
+        /* Secondary Dark Background (Replaces default light gray sections) */
+        .dark .bg-gray-100 { background-color: #1e1e1e !important; }
+
+        /* Card Backgrounds (Replaces default white cards, uses richer dark gray) */
+        .dark .bg-white { background-color: #2D2D2D !important; }
+        
+        /* Text Colors for contrast */
+        .dark .text-gray-900 { color: #F8F8F8; }
+        .dark .text-gray-600 { color: #B0B0B0; }
+        .dark .text-gray-500 { color: #8A8A8A; }
+        .dark .shadow-sm, .dark .shadow-md, .dark .shadow-xl { 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Stronger shadows for depth */
+        }
+        .dark .border-gray-200 { border-color: #444; }
+
+
+        /* --- 3. Scroll-In Animation --- */
+        .scroll-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 4. Animated Gradient Blur Theme (Background) --- */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Darker, more subtle default animation */
+        .animated-bg {
+            background: linear-gradient(270deg, #101F42, #5D2D1E); /* Deep Navy and Dark Rust */
+            background-size: 400% 400%;
+            animation: gradient-shift 25s ease infinite;
+            filter: brightness(1.2) opacity(0.1); 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10; 
+        }
+
+        /* --- 5. How It Works Step Styling (Interactive) --- */
+        .how-it-works-step {
+            border: 2px solid transparent;
+        }
+        .how-it-works-step.active {
+            border-color: #FF5722; 
+            background-color: #2D2D2D !important; /* Keep active card dark */
+            box-shadow: 0 0 0 4px rgba(255, 87, 34, 0.4); /* Glow effect */
+        }
+
+        /* --- 6. Modal Styles --- */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); /* Blacker backdrop */
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+        }
+
+        .modal-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        @keyframes popOut {
+            0% { transform: scale(1) translateY(0); opacity: 1; }
+            100% { transform: scale(0.9) translateY(20px); opacity: 0; }
+        }
+
+        .item-modal-content {
+            background-color: #2D2D2D; /* Dark content background */
+            border-radius: 1.5rem; 
+            max-width: 95%;
+            width: 500px;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: popOut 0.3s forwards; 
+        }
+
+        .modal-backdrop.open .item-modal-content {
+            animation: popIn 0.3s forwards;
+        }
+
+        .item-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            background-color: #383838; /* Slightly lighter card background */
+            color: #F8F8F8;
+        }
+        .item-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(255, 87, 34, 0.5); 
+        }
+
+    </style>
+</head>
+<body class="font-sans antialiased bg-gray-50 text-gray-900 transition-colors">
+
+    <!-- Animated Background Layer (First child of body) -->
+    <div class="animated-bg"></div> 
+    
+    <!-- Header (Navigation) -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 transition-colors dark:bg-2D2D2D border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="/" class="text-2xl font-extrabold tracking-tight text-givengo-orange transition-colors">
+                    GIVE/GO
+                </a>
+                <nav class="hidden md:flex space-x-8 text-gray-600 transition-colors">
+                    <a href="#how-it-works" class="hover:text-givengo-orange">How It Works</a>
+                    <a href="#impact" class="hover:text-givengo-orange">Our Impact</a>
+                    <a href="#stories" class="hover:text-givengo-orange">Stories</a>
+                    <a href="/login" class="hover:text-givengo-orange">Login</a>
+                    <a href="/signup" class="px-3 py-1.5 rounded-full bg-givengo-orange text-white hover:bg-givengo-orange-dark">Join Us</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    
+                    <!-- Dark Mode Toggle Button -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path id="moon-icon" class="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            <path id="sun-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.354 5.354l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Mobile Menu Button (Placeholder) -->
+                    <button class="md:hidden p-2 rounded-md text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-givengo-blue" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- 1. HERO SECTION: Dynamic Headline & Dual CTAs (Darker Gradient) -->
+        <section class="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-[#0a192f] to-givengo-blue text-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight drop-shadow-lg scroll-in">
+                    Got unused items?
+                    <span class="block text-givengo-orange mt-3">Someone needs them now.</span>
+                </h1>
+                <p class="mt-6 text-xl text-blue-200 max-w-3xl mx-auto scroll-in" style="animation-delay: 0.2s;">
+                    **GIVE/GO** connects your pre-loved possessions directly to vetted people and families in your local community.
+                </p>
+
+                <div class="mt-12 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 scroll-in" style="animation-delay: 0.4s;">
+                    <button onclick="openGiveItemModal()" class="w-full sm:w-auto px-10 py-4 text-lg font-bold rounded-full shadow-lg text-white bg-givengo-orange hover:bg-givengo-orange-dark transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-givengo-orange/50">
+                        <svg class="w-6 h-6 inline mr-3 -mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L6.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        Give an Item
+                    </button>
+                    
+                    <a href="/request-item" class="w-full sm:w-auto px-10 py-4 text-lg font-bold rounded-full shadow-lg text-givengo-blue bg-white hover:bg-gray-100 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/50 dark:text-gray-100 dark:bg-gray-600 dark:hover:bg-gray-500">
+                        <svg class="w-6 h-6 inline mr-3 -mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        Request an Item
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- 2. "Our Impact" Snapshot -->
+        <section id="impact" class="bg-gray-100 py-16 sm:py-20 transition-colors">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-12 scroll-in">Our Impact, Together.</h2>
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-3 text-center">
+                    
+                    <div class="p-8 bg-white rounded-3xl shadow-xl scroll-in" style="animation-delay: 0.2s;">
+                        <p class="text-5xl font-extrabold text-givengo-orange" id="items-connected-count">0</p>
+                        <p class="mt-4 text-xl font-medium text-gray-500">Items Connected</p>
+                    </div>
+
+                    <div class="p-8 bg-white rounded-3xl shadow-xl scroll-in" style="animation-delay: 0.4s;">
+                        <p class="text-5xl font-extrabold text-givengo-orange" id="communities-served-count">0</p>
+                        <p class="mt-4 text-xl font-medium text-gray-500">Communities Served</p>
+                    </div>
+
+                    <div class="p-8 bg-white rounded-3xl shadow-xl scroll-in" style="animation-delay: 0.6s;">
+                        <p class="text-5xl font-extrabold text-givengo-orange" id="donors-active-count">0</p>
+                        <p class="mt-4 text-xl font-medium text-gray-500">Active Donors</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- 3. How It Works - Interactive Stepped Interface -->
+        <section id="how-it-works" class="py-16 sm:py-20 bg-white transition-colors">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-12 scroll-in">How It Works</h2>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Left: Steps Navigation -->
+                    <div class="space-y-6 md:space-y-8 scroll-in">
+                        <div class="flex items-start p-6 bg-gray-50 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg cursor-pointer how-it-works-step active" data-step="1">
+                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-givengo-orange text-white text-xl font-bold">1</div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-semibold text-gray-900">Snap & List Your Item</h3>
+                                <p class="mt-1 text-gray-600">Quickly upload photos and details of your unused item. It's fast, easy, and free!</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start p-6 bg-gray-50 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg cursor-pointer how-it-works-step" data-step="2">
+                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-givengo-blue text-white text-xl font-bold">2</div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-semibold text-gray-900">Smart Match & Verify</h3>
+                                <p class="mt-1 text-gray-600">Our system finds a vetted recipient in your local area who truly needs your item.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start p-6 bg-gray-50 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg cursor-pointer how-it-works-step" data-step="3">
+                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-givengo-orange text-white text-xl font-bold">3</div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-semibold text-gray-900">Connect & Go!</h3>
+                                <p class="mt-1 text-gray-600">Arrange a safe and convenient pickup or drop-off. Make an impact, effortlessly.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Visual/Image for Current Step -->
+                    <div class="md:order-last order-first scroll-in relative h-96">
+                        <!-- Visual 1: Snap & List -->
+                        <div id="how-it-works-visual-1" class="how-it-works-visual absolute w-full h-full p-6 bg-givengo-orange/10 rounded-3xl shadow-xl flex items-center justify-center text-givengo-orange text-6xl transition-all duration-500 transform scale-100 opacity-100">
+                           <i class="fas fa-camera"></i> <span class="ml-4 fas fa-boxes"></span>
+                        </div>
+                        <!-- Visual 2: Smart Match -->
+                        <div id="how-it-works-visual-2" class="how-it-works-visual absolute w-full h-full p-6 bg-givengo-blue/20 rounded-3xl shadow-xl flex items-center justify-center text-givengo-blue text-6xl hidden transition-all duration-500 transform scale-95 opacity-0">
+                           <i class="fas fa-search-location"></i> <span class="ml-4 fas fa-check-circle"></span>
+                        </div>
+                        <!-- Visual 3: Connect & Go -->
+                        <div id="how-it-works-visual-3" class="how-it-works-visual absolute w-full h-full p-6 bg-givengo-orange/10 rounded-3xl shadow-xl flex items-center justify-center text-givengo-orange text-6xl hidden transition-all duration-500 transform scale-95 opacity-0">
+                           <i class="fas fa-handshake"></i> <span class="ml-4 fas fa-car-side"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- 4. Featured Success Story -->
+        <section id="stories" class="bg-gray-100 py-16 sm:py-20 transition-colors">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-12 scroll-in">Stories of Impact</h2>
+                <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl p-8 md:p-12 scroll-in">
+                    <!-- Note: The YouTube link is a placeholder, as intended. -->
+                    <iframe class="w-full aspect-video rounded-2xl shadow-lg mb-6" src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <h3 class="text-2xl font-bold text-gray-900">"A new beginning for our family"</h3>
+                    <p class="mt-4 text-lg text-gray-600 italic">"Thanks to GIVE/GO, we received a perfectly good washing machine and dryer. It's made such a difference in our daily lives. We are incredibly grateful to the generous donor and this amazing platform."</p>
+                    <p class="mt-4 text-gray-500 font-semibold">- The Rodriguez Family, Recipient</p>
+                </div>
+                <div class="mt-10 scroll-in">
+                    <a href="/success-stories" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-givengo-blue hover:bg-blue-700 transition-colors">
+                        Read More Stories
+                        <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                            <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- 5. Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-givengo-orange text-lg font-bold mb-4">GIVE/GO</h3>
+                    <p class="text-sm">Connect. Simplify. Impact.</p>
+                    <p class="mt-4 text-xs">&copy; 2023 GIVE/GO Charity. All rights reserved.</p>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#how-it-works" class="hover:text-givengo-orange transition-colors">How It Works</a></li>
+                        <li><a href="#impact" class="hover:text-givengo-orange transition-colors">Our Impact</a></li>
+                        <li><a href="#stories" class="hover:text-givengo-orange transition-colors">Success Stories</a></li>
+                        <li><a href="/privacy" class="hover:text-givengo-orange transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms" class="hover:text-givengo-orange transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://facebook.com/givego" class="text-gray-400 hover:text-givengo-orange transition-colors"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="https://twitter.com/givego" class="text-gray-400 hover:text-givengo-orange transition-colors"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="https://instagram.com/givego" class="text-gray-400 hover:text-givengo-orange transition-colors"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="mailto:info@givego.org" class="text-gray-400 hover:text-givengo-orange transition-colors"><i class="fas fa-envelope fa-lg"></i></a>
+                    </div>
+                    <p class="mt-4 text-sm">Charity Registration Number: 123456789</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Item Category Modal -->
+    <div id="item-modal" class="modal-backdrop flex items-center justify-center p-4">
+        <div class="item-modal-content relative">
+            <button onclick="closeGiveItemModal()" class="absolute top-4 right-4 text-gray-400 hover:text-givengo-orange transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <h3 class="text-3xl font-extrabold text-givengo-blue mb-2">What are you giving?</h3>
+            <p class="text-gray-600 mb-6">Select a category to start your donation listing.</p>
+
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Clothes -->
+                <a href="/list/clothes" class="item-card p-4 text-center rounded-xl border border-gray-600 hover:border-givengo-orange cursor-pointer">
+                    <i class="fas fa-tshirt fa-2x text-givengo-orange mb-2"></i>
+                    <p class="font-semibold text-gray-100">Clothes</p>
+                </a>
+                
+                <!-- Books -->
+                <a href="/list/books" class="item-card p-4 text-center rounded-xl border border-gray-600 hover:border-givengo-orange cursor-pointer">
+                    <i class="fas fa-book-open fa-2x text-givengo-blue mb-2"></i>
+                    <p class="font-semibold text-gray-100">Books</p>
+                </a>
+
+                <!-- Food -->
+                <a href="/list/food" class="item-card p-4 text-center rounded-xl border border-gray-600 hover:border-givengo-orange cursor-pointer">
+                    <i class="fas fa-utensils fa-2x text-givengo-orange mb-2"></i>
+                    <p class="font-semibold text-gray-100">Food</p>
+                </a>
+                
+                <!-- Electronic Items -->
+                <a href="/list/electronics" class="item-card p-4 text-center rounded-xl border border-gray-600 hover:border-givengo-orange cursor-pointer">
+                    <i class="fas fa-laptop fa-2x text-givengo-blue mb-2"></i>
+                    <p class="font-semibold text-gray-100">Electronics</p>
+                </a>
+            </div>
+            
+            <p class="mt-6 text-xs text-gray-500">Need to request an item instead? <a href="/request-item" class="text-givengo-blue hover:underline">Click here.</a></p>
+        </div>
+    </div>
+    <!-- End of Item Category Modal -->
+
+    <script>
+        // --- Dark Mode Toggle Logic (Updated for Dark First) ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // Check for saved theme preference or force dark on initial load
+        if (localStorage.theme === 'light') {
+            htmlElement.classList.remove('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+             // Default to dark
+            htmlElement.classList.add('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        });
+
+        // --- "Our Impact" Counter Animation ---
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        const impactSection = document.getElementById('impact');
+        let hasAnimatedImpact = false; 
+
+        const observerImpact = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimatedImpact) {
+                    // Start counting when impact section becomes visible
+                    animateValue(document.getElementById('items-connected-count'), 0, 1452, 2000);
+                    animateValue(document.getElementById('communities-served-count'), 0, 32, 2500);
+                    animateValue(document.getElementById('donors-active-count'), 0, 685, 3000);
+                    hasAnimatedImpact = true;
+                    observerImpact.unobserve(impactSection); 
+                }
+            });
+        }, { threshold: 0.5 }); 
+
+        observerImpact.observe(impactSection);
+
+
+        // --- "How It Works" Tabbed Visuals Logic ---
+        const howItWorksSteps = document.querySelectorAll('.how-it-works-step');
+        const howItWorksVisuals = document.querySelectorAll('.how-it-works-visual');
+
+        // Initial setup to ensure step 1 is active on load
+        document.addEventListener('DOMContentLoaded', () => {
+             // Deactivate all visuals initially
+             howItWorksVisuals.forEach(v => {
+                 v.classList.add('hidden', 'scale-95', 'opacity-0');
+                 v.classList.remove('scale-100', 'opacity-100');
+             });
+             // Activate the first visual
+             const initialVisual = document.getElementById('how-it-works-visual-1');
+             if (initialVisual) {
+                 initialVisual.classList.remove('hidden', 'scale-95', 'opacity-0');
+                 initialVisual.classList.add('scale-100', 'opacity-100');
+             }
+        });
+
+        howItWorksSteps.forEach(step => {
+            step.addEventListener('click', () => {
+                const stepNumber = step.dataset.step;
+
+                // Deactivate all steps and visuals
+                howItWorksSteps.forEach(s => s.classList.remove('active'));
+                howItWorksVisuals.forEach(v => {
+                    // Hide with transition
+                    v.classList.add('hidden', 'scale-95', 'opacity-0');
+                    v.classList.remove('scale-100', 'opacity-100');
+                });
+
+                // Activate clicked step
+                step.classList.add('active');
+
+                // Show corresponding visual with animation
+                const activeVisual = document.getElementById(`how-it-works-visual-${stepNumber}`);
+                if (activeVisual) {
+                    // Use a timeout to reset 'hidden' class after transition starts to ensure smooth animation
+                    setTimeout(() => {
+                        activeVisual.classList.remove('hidden');
+                        setTimeout(() => {
+                             activeVisual.classList.remove('scale-95', 'opacity-0');
+                             activeVisual.classList.add('scale-100', 'opacity-100');
+                        }, 50); // Small delay for browser reflow
+                    }, 50); 
+                }
+            });
+        });
+
+        // --- Scroll-Triggered Animations ---
+        const scrollInElements = document.querySelectorAll('.scroll-in');
+
+        const observerScrollIn = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Stop observing after animation is active to optimize performance
+                    observerScrollIn.unobserve(entry.target); 
+                }
+            });
+        }, {
+            threshold: 0.1, 
+            rootMargin: '0px 0px -50px 0px' 
+        });
+
+        scrollInElements.forEach(el => observerScrollIn.observe(el));
+
+
+        // --- Modal Functionality (Give Item) ---
+        const itemModal = document.getElementById('item-modal');
+        const modalContent = itemModal.querySelector('.item-modal-content');
+
+        function openGiveItemModal() {
+            itemModal.classList.add('open');
+            // Prevent scrolling while modal is open
+            document.body.style.overflow = 'hidden';
+            // Start popIn animation
+            modalContent.style.animation = 'popIn 0.3s forwards';
+        }
+
+        function closeGiveItemModal() {
+            // Start exit animation
+            modalContent.style.animation = 'popOut 0.3s forwards';
+            
+            // After animation, hide the backdrop and re-enable scrolling
+            setTimeout(() => {
+                itemModal.classList.remove('open');
+                document.body.style.overflow = '';
+                // Reset animation style so it uses the CSS default on next open
+                modalContent.style.animation = '';
+            }, 300); // Match animation duration
+        }
+
+        // Close modal when clicking outside the content (on the backdrop)
+        itemModal.addEventListener('click', (e) => {
+            if (e.target === itemModal) {
+                closeGiveItemModal();
+            }
+        });
+        // Close modal on Escape key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && itemModal.classList.contains('open')) {
+                closeGiveItemModal();
+            }
+        });
+
+    </script>
+
+</body>
+</html>
